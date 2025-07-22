@@ -16,6 +16,7 @@ warnings.filterwarnings("ignore")
 CONFIG = {
     "dagshub_repo_owner": "das.99.ankan",
     "dagshub_repo_name": "MLOps-MyPrj2",
+    "registered_model_name": "my_model", 
     "experiment_name": "DVC_Pipeline_Evaluation"
 }
 
@@ -49,7 +50,7 @@ def setup_mlflow():
     
     logging.info(f"MLflow setup for production complete. Tracking to: {mlflow_tracking_uri}")
 
-    
+
 # ==========================
 # HELPER FUNCTIONS
 # ==========================
