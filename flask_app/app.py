@@ -73,6 +73,7 @@ def normalize_text(text):
 CONFIG = {
     "dagshub_repo_owner": "das.99.ankan",
     "dagshub_repo_name": "MLOps-MyPrj2",
+    "registered_model_name": "my_model",
     "experiment_name": "DVC_Pipeline_Evaluation"
 }
 
