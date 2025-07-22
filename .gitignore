@@ -205,3 +205,34 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+cred.txt
+mlruns/
+# Virtual environment
+myenv/
+# Notebook checkpoints
+notebooks/__pycache__/
+notebooks/*.pyc
+notebooks/*.pyo
+notebooks/*.pyd
+
+# Jupyter auto-saves
+*.nbconvert.ipynb
+
+# Data exports or generated CSVs (optional)
+*.log
+*.csv
+!notebooks/data.csv
+!notebooks/IMDB.csv
+
+# Python backup and temp files
+*~
+*.bak
+*.swp
+
+notebooks/
+local_s3/
+
+data/
+
+models/
