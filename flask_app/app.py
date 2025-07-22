@@ -67,11 +67,44 @@ def normalize_text(text):
 
     return text
 
-# Below code block is for local use
-# -------------------------------------------------------------------------------------
-mlflow.set_tracking_uri('https://dagshub.com/das.99.ankan/MLOps-MyPrj2.mlflow')
-dagshub.init(repo_owner='das.99.ankan', repo_name='MLOps-MyPrj2', mlflow=True)
-# -------------------------------------------------------------------------------------
+# ==========================
+# CONFIGURATION
+# ==========================
+CONFIG = {
+    "dagshub_repo_owner": "das.99.ankan",
+    "dagshub_repo_name": "MLOps-MyPrj2",
+    "experiment_name": "DVC_Pipeline_Evaluation"
+}
+
+# ==========================
+# SETUP
+# ==========================
+def setup_mlflow():
+    """Initializes MLflow for tracking using production-safe environment variables."""
+    
+    # --- Production-Ready MLflow Setup ---
+
+    # Set up DagsHub credentials for MLflow tracking from environment variables
+    dagshub_token = os.getenv("CAPSTONE_TEST")
+    if not dagshub_token:
+        raise EnvironmentError("The environment variable 'CAPSTONE_TEST' is not set. Please provide your DagsHub token.")
+
+    # Set environment variables for MLflow to use for authentication
+    os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
+    os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
+
+    # Construct the MLflow tracking URI
+    repo_owner = CONFIG["dagshub_repo_owner"]
+    repo_name = CONFIG["dagshub_repo_name"]
+    mlflow_tracking_uri = f'https://dagshub.com/{repo_owner}/{repo_name}.mlflow'
+    
+    # Set up MLflow tracking URI
+    mlflow.set_tracking_uri(mlflow_tracking_uri)
+    
+    # Set the experiment name
+    mlflow.set_experiment(CONFIG["experiment_name"])
+    
+    logging.info(f"MLflow setup for production complete. Tracking to: {mlflow_tracking_uri}")
 
 
 
