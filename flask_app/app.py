@@ -82,31 +82,19 @@ CONFIG = {
 # ==========================
 def setup_mlflow():
     """Initializes MLflow for tracking using production-safe environment variables."""
-    
-    # --- Production-Ready MLflow Setup ---
-
-    # Set up DagsHub credentials for MLflow tracking from environment variables
-    dagshub_token = os.getenv("CAPSTONE_TEST")
-    if not dagshub_token:
-        raise EnvironmentError("The environment variable 'CAPSTONE_TEST' is not set. Please provide your DagsHub token.")
-
-    # Set environment variables for MLflow to use for authentication
-    os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
-    os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
-
-    # Construct the MLflow tracking URI
+    # This function is correct as-is.
+    # It will use the environment variables from the ci.yaml file.
     repo_owner = CONFIG["dagshub_repo_owner"]
     repo_name = CONFIG["dagshub_repo_name"]
-    mlflow_tracking_uri = f'https://dagshub.com/{repo_owner}/{repo_name}.mlflow'
-    
-    # Set up MLflow tracking URI
-    mlflow.set_tracking_uri(mlflow_tracking_uri)
-    
-    # Set the experiment name
+    mlflow.set_tracking_uri(f'https://dagshub.com/{repo_owner}/{repo_name}.mlflow')
     mlflow.set_experiment(CONFIG["experiment_name"])
-    
-    logging.info(f"MLflow setup for production complete. Tracking to: {mlflow_tracking_uri}")
+    print(f"MLflow tracking URI set to: {mlflow.get_tracking_uri()}")
 
+
+# --- THIS IS THE CRUCIAL FIX ---
+# Call the setup function to configure MLflow before anything else uses it.
+setup_mlflow()
+# --------------------------------
 
 
 
@@ -157,8 +145,9 @@ def get_latest_model_version(model_name):
 
     return latest_versions[0].version if latest_versions else None
 
-model_version = get_latest_model_version(model_name)
-model_uri = f'models:/{model_name}/{model_version}'
+# --- USE THE CONFIG DICTIONARY FOR CONSISTENCY ---
+model_version = get_latest_model_version(CONFIG["registered_model_name"])
+model_uri = f'models:/{CONFIG["registered_model_name"]}/{model_version}'
 print(f"Fetching model from: {model_uri}")
 model = mlflow.pyfunc.load_model(model_uri)
 vectorizer = pickle.load(open('models/vectorizer.pkl', 'rb'))
