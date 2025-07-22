@@ -6,7 +6,7 @@ This repository showcases a complete, end-to-end MLOps project that automates th
 
 ## 📌 Overview
 
-At the core of this project is a **Logistic Regression** model that classifies text as *positive* or *negative*. However, the emphasis lies not just in model accuracy, but in building a **robust MLOps infrastructure** around it, including:
+At the core of this project is a **Logistic Regression** model that classifies text as *positive* or *negative*. However, the emphasis lies not much in model accuracy, but in building a **robust MLOps infrastructure** around it, including:
 
 - ✅ Data versioning  
 - ✅ Experiment tracking  
