@@ -105,7 +105,11 @@ Comparing this URI with the output of aws ecr describe-repositories revealed the
 Learning: ImagePullBackOff is a generic error. kubectl describe pod is the most critical tool for diagnostics, as it provides the specific underlying reason (e.g., 403 Forbidden, manifest not found). Always verify that the image URI in your Kubernetes deployment manifest is a 100% exact match with the image URI in your container registry.
 
 Project Visuals
-![After selecting Logistic Regression as the primary algorithm, this MLflow experiment was run to fine-tune its hyperparameters. This parallel coordinates plot visualizes how different values for the regularization parameter (C) and the penalty (l1 vs. l2) impact the model's final accuracy. The color of each line corresponds to the accuracy score, clearly highlighting the combination of parameters that yielded the best-performing model for deployment.](screenshots/MLflow Hyperparameter Tuning for Logistic Regression.png)
+🔹 MLflow Hyperparameter Tuning
+(screenshots/MLflow Hyperparameter Tuning for Logistic Regression.png)
+After selecting Logistic Regression as the primary algorithm, this MLflow experiment was run to fine-tune its hyperparameters.
+This parallel coordinates plot visualizes how different values for the regularization parameter (C) and the penalty (l1 vs. l2) impact the model's final accuracy.
+The color of each line corresponds to the accuracy score, clearly highlighting the combination of parameters that yielded the best-performing model for deployment.
 
 ![This screenshot shows the MLflow Parallel Coordinates Plot, which was essential for the initial model selection phase of the project. This powerful visualization compares multiple experiment runs at once, testing different classification algorithms (such as XGBoost, Logistic Regression, and Random Forest) against different text feature engineering techniques (BoW and TF-IDF). Each line represents a single training run. The lines are colored by the accuracy metric, making it easy to identify the top-performing model-feature combinations at a glance. This chart was crucial for quickly narrowing down the options and justifying the choice of the final model that was carried forward for deployment.](screenshots/MLflow Model & Feature Comparison.png)
 
