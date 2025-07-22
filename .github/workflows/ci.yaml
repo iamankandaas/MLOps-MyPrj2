@@ -53,4 +53,7 @@ jobs:
         if: success()
         env:
           CAPSTONE_TEST: ${{ secrets.CAPSTONE_TEST }}
+          # --- ADD THESE TWO LINES ---
+          MLFLOW_TRACKING_USERNAME: ${{ secrets.CAPSTONE_TEST }}
+          MLFLOW_TRACKING_PASSWORD: ${{ secrets.CAPSTONE_TEST }}
         run: python -m unittest tests/test_flask_app.py
