@@ -155,7 +155,6 @@ pyparsing==3.1.2
 python-dateutil==2.9.0.post0
 python-slugify==8.0.4
 pytz==2024.1
-pywin32==311
 PyYAML==6.0.1
 pyzmq==27.0.0
 querystring-parser==1.2.4
